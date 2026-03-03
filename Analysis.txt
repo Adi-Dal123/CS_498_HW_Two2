@@ -1,0 +1,7 @@
+US register avg latency: 0.08
+US list avg latency: 0.10
+EU register avg latency: 0.37
+EU list avg latency: 0.44
+Number of times username not found: 0/100
+
+Analysis: The signifiacnt differece in latencies can be attributed to the distanc the eruopean server is when compared to the US server. The consistency experiment showed that GCP was very good at updating both VMs access to datastore. This is evident as all the usernames were found when list was run in part B for the european vm.
