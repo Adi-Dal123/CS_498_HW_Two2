@@ -1,0 +1,43 @@
+import requests
+import time
+ip1 = 'http://136.119.171.50:8080'
+ip2 = 'http://35.240.38.9:8080'
+registerTimes1 = 0
+for i in range(10):
+    start = time.time()
+    requests.post(ip1 + '/register', json={'username': f'us{i}'})
+    registerTimes1+= (time.time() - start)
+avgLatencyRegister1 = registerTimes1/10
+print(f'US register avg latency: {avgLatencyRegister1:.2f}')
+listImes1 = 0
+for i in range(10):
+    start = time.time()
+    requests.get(ip1 + '/list')
+    listImes1 += (time.time() - start)
+avgLatencyList1 = listImes1/10
+print(f'US list avg latency: {avgLatencyList1:.2f}')
+registerTimes2 = 0
+for i in range(10):
+    start = time.time()
+    requests.post(ip2 + '/register', json={'username': f'eu{i}'})
+    registerTimes2+= (time.time() - start)
+avgLatencyRegister2 = registerTimes2/10
+print(f'EU register avg latency: {avgLatencyRegister2:.2f}')
+listImes2 = 0
+for i in range(10):
+    start = time.time()
+    requests.get(ip2 + '/list')
+    listImes2 += (time.time() - start)
+avgLatencyList2 = listImes2/10
+print(f'EU list avg latency: {avgLatencyList2:.2f}')
+userNotFound = 0
+for i in range(100):
+    username = f'user-{int(time.time()*1000)}-{i}'
+    requests.post(ip1 + '/register', json={'username': username})
+    try:
+        users = requests.get(ip2 + '/list').json().get('users', [])
+    except:
+        users = []
+    if username not in users:
+        userNotFound += 1
+print(f'\nNumber of times username not found on instance 2: {userNotFound}/100')
