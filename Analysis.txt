@@ -1,7 +1,10 @@
-US register avg latency: 0.08
-US list avg latency: 0.10
-EU register avg latency: 0.37
-EU list avg latency: 0.44
+Latency Results:
+US register avg latency: 0.08774936199188232
+US list avg latency: 0.08982739448547364
+EU register avg latency: 0.4065007448196411
+EU list avg latency: 0.36912522315979
+
+Consistency Experiments Result:
 Number of times username not found: 0/100
 
-Analysis: The signifiacnt differece in latencies can be attributed to the distanc the eruopean server is when compared to the US server. The consistency experiment showed that GCP was very good at updating both VMs access to datastore. This is evident as all the usernames were found when list was run in part B for the european vm.
+Analysis: The significant differece in latencies between the two instances can be attributed to the distance the eruopean server is when compared to the US server. In terms of the differnece observed between the register and list endpoints, it can be noticed that register takes longer than list for both instances. This difference can be attributed to register needing to send more information in its HTTP Post request and the database having to insert a new entity. Both of these take more time than list which is a HTTP GET request and simple database query. If Firestore is replicating the database then that is something that will also cause the /register endpoint to take longer as it will need to wait for a set number of replicas to respond before responding back to the user while list can just return the data immediately as it is eventually consistent. The consistency experiment showed that GCP has very little replication lag as all the usernames were found when list was run in part B for the european vm.
