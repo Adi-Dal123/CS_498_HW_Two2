@@ -8,30 +8,30 @@ for i in range(10):
     requests.post(ip1 + '/register', json={'username': f'us{i}'})
     registerTimes1+= (time.time() - start)
 avgLatencyRegister1 = registerTimes1/10
-print(f'US register avg latency: {avgLatencyRegister1:.2f}')
+print(f'US register avg latency: {avgLatencyRegister1}')
 listImes1 = 0
-for i in range(10):
+for i in range(0,10):
     start = time.time()
     requests.get(ip1 + '/list')
     listImes1 += (time.time() - start)
 avgLatencyList1 = listImes1/10
-print(f'US list avg latency: {avgLatencyList1:.2f}')
+print(f'US list avg latency: {avgLatencyList1}')
 registerTimes2 = 0
-for i in range(10):
+for i in range(0,10):
     start = time.time()
     requests.post(ip2 + '/register', json={'username': f'eu{i}'})
     registerTimes2+= (time.time() - start)
 avgLatencyRegister2 = registerTimes2/10
-print(f'EU register avg latency: {avgLatencyRegister2:.2f}')
+print(f'EU register avg latency: {avgLatencyRegister2}')
 listImes2 = 0
 for i in range(10):
     start = time.time()
     requests.get(ip2 + '/list')
     listImes2 += (time.time() - start)
 avgLatencyList2 = listImes2/10
-print(f'EU list avg latency: {avgLatencyList2:.2f}')
+print(f'EU list avg latency: {avgLatencyList2}')
 userNotFound = 0
-for i in range(100):
+for i in range(0,100):
     username = f'user-{int(time.time()*1000)}-{i}'
     requests.post(ip1 + '/register', json={'username': username})
     try:
