@@ -1,3 +1,7 @@
+Explanation:
+I created the below python script to give me the average latencies for register first and then list for each of the two instances. Instance 1 was the US instance an Instance 2 was the eruopean instance. After latencies were found for both instances I then did the experiment for part B.
+
+Python Script:
 import requests
 import time
 ip1 = 'http://136.119.171.50:8080'
